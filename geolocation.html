@@ -20,5 +20,11 @@
       <!-- ein Bild zum Anzeigen der Position -->
       <img id="geolocation_marker" src="point.png" />
       <script type="text/javascript">   </script>
+      function ausgabe( strAusgabe ){
+   if(!strAusgabe){ strAusgabe = "!";} // (***)
+   // alert( strAusgabe );
+   // console.log( strAusgabe );
+   document.getElementById('ausgabe').innerHTML = strAusgabe; // (*)
+   }
    </body>
 </html>
