@@ -78,17 +78,7 @@
    map.setView( view ); 
    }); 
 }
-function position_auf_karte_anzeigen(){
 
-   var markerEl = document.getElementById('geolocation_marker');
-   map.addOverlay(
-      new ol.Overlay({
-                      position: positionAufKarte, // vgl. oben 5.
-                      element: markerEl,
-                      stopEvent: false
-                    })
-                 );
-   }
    </script>
    </body>
 </html>
