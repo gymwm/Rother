@@ -37,6 +37,47 @@
       ausgabe(posAusgabe);
       });                                                                         //(**)
    }
+   function karte_anzeigen(){
+   // Instanzierung eines neuen Map-Objekts aus dem Framework OpenLayer3
+   map = new ol.Map({                // Parameter: Objekt mit Optionen (*)
+                                     // Option 1: Layers (Schichten)
+      layers: [new ol.layer.Tile({   // Einbinden einer OSM-Karte
+                               source: new ol.source.MapQuest({layer: 'osm'})
+                                })],
+                                     // Option 2: View (Ansicht)
+      view: new ol.View({            // Definition einer Ansicht der Karte
+                       center: [0,0], // Positionsangabe für die Mitte
+                       zoom: 2       // Zoomstufe, 0 - 28 
+                       }), 
+      target: 'map'                  // Option 3: Zielelement
+                                     // ID des HTML-Elements, 
+                                     //   in dem die Karte gezeigt werden soll
+      });
+   }
+   function karte_auf_position_zentrieren(){ 
+
+   navigator.geolocation.getCurrentPosition( function (position){
+				
+   // Daten der Geoposition
+   geoPosition = [position.coords.longitude, position.coords.latitude];
+				
+   // Projektion der Geoposition auf die Karte
+   positionAufKarte = ol.proj.transform(
+                                        geoPosition, 
+                                        'EPSG:4326', 
+                                        'EPSG:3857'
+                                        );
+								
+   // Definition einer Kartenansicht
+   var view = 	new ol.View({
+                            center: positionAufKarte, // aktuelle Position
+                            zoom: 12                  // geeigneter Zoom
+			    });
+								
+   // Aktualisierung der Kartenansicht
+   map.setView( view ); 
+   }); 
+}
    </script>
    </body>
 </html>
